@@ -8,11 +8,13 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { GlobalStyles } from "../../src/styles/globalStyle";
 import { Colors } from "../../src/styles/color";
+import FilterBar from "../../src/components/filterBar";
 
 export default function TabTwoScreen() {
   return (
     <SafeAreaView style={GlobalStyles.screen}>
       <Text style={GlobalStyles.heading}>Learn</Text>
+      <FilterBar />
     </SafeAreaView>
   );
 }

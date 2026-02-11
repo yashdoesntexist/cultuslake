@@ -1,38 +1,38 @@
-import { ScrollView, TouchableOpacity, Text, View } from "react-native";
-import { useState } from "react";
-import { Colors } from "../../src/styles/color";
+import {
+  ScrollView,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  View,
+} from "react-native";
+import { Colors } from "../styles/color";
 
-export default function FilterBar() {
-  const [selected, setSelected] = useState("All");
+type FilterBarProps = {
+  selected: string;
+  onSelect: (filter: string) => void;
+};
 
-  const filters = ["All", "Guitar", "Drums", "Piano", "Singing"];
+const filters = ["All", "Guitar", "Piano", "Drums"];
 
+export default function FilterBar({ selected, onSelect }: FilterBarProps) {
   return (
-    <View style={{ height: 50 }}>
+    <View style={styles.wrapper}>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 16, alignItems: "center" }}
+        contentContainerStyle={styles.container}
       >
         {filters.map((filter) => {
           const isSelected = filter === selected;
+
           return (
             <TouchableOpacity
               key={filter}
-              onPress={() => setSelected(filter)}
-              style={{
-                backgroundColor: isSelected ? Colors.primary : "#333",
-                paddingVertical: 8,
-                paddingHorizontal: 16,
-                borderRadius: 20,
-                marginRight: 8,
-              }}
+              onPress={() => onSelect(filter)}
+              style={[styles.filterButton, isSelected && styles.activeButton]}
             >
               <Text
-                style={{
-                  color: isSelected ? "#fff" : "#ccc",
-                  fontWeight: isSelected ? "700" : "500",
-                }}
+                style={[styles.filterText, isSelected && styles.activeText]}
               >
                 {filter}
               </Text>
@@ -43,3 +43,30 @@ export default function FilterBar() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  wrapper: {
+    marginVertical: 10,
+  },
+  container: {
+    paddingHorizontal: 10,
+  },
+  filterButton: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
+    marginRight: 8,
+    backgroundColor: "#333",
+    alignSelf: "flex-start", // 🔥 prevents stretching
+  },
+  activeButton: {
+    backgroundColor: Colors.primary,
+  },
+  filterText: {
+    color: "#ccc",
+    fontWeight: "600",
+  },
+  activeText: {
+    color: "#fff",
+  },
+});

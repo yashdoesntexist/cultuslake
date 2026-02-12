@@ -48,7 +48,7 @@ export default function YouTubeFunc() {
 
   const fetchVideos = async (filter: string) => {
     if (!API_KEY) {
-      console.error("API_KEY is missing! Check your .env or app.json setup.");
+      console.error("Something went wrong! try again later.");
       return;
     }
 
@@ -70,7 +70,7 @@ export default function YouTubeFunc() {
       const data = await res.json();
 
       if (data.error) {
-        console.error("YouTube API Error:", data.error.message);
+        console.error(" API Error:", data.error.message);
         setVideos([]);
         return;
       }

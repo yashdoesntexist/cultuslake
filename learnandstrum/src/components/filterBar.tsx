@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginRight: 8,
     backgroundColor: "#333",
-    alignSelf: "flex-start", // 🔥 prevents stretching
+    alignSelf: "flex-start",
   },
   activeButton: {
     backgroundColor: Colors.primary,
